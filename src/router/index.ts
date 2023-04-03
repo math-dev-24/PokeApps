@@ -23,4 +23,12 @@ const router = createRouter({
   ]
 })
 
+router.beforeEach((to, from) => {
+  if (to.params.name){
+    document.title = `Pokedex - ${to.params.name}`
+  }else{
+    document.title = "Pokedex"
+  }
+})
+
 export default router
