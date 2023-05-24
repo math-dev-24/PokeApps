@@ -4,7 +4,6 @@ import CardPokemon from "@/components/CardPokemon.vue";
 import Filter from "@/components/Filter.vue"
 import type {FilterUpdate} from "@/shared/interfaces/filter.interface";
 import TheLoader from "@/components/TheLoader.vue";
-import {ReturnColorByType} from "@/shared/Color";
 
 const pokemonStore = usePokemon()
 function UpdateFilter(updateFilter: FilterUpdate){
@@ -20,9 +19,10 @@ function UpdateFilter(updateFilter: FilterUpdate){
     <div class="flex flex-wrap w-full content-center items-center md:w-4/5 m-auto">
       <template
           v-if="pokemonStore.isLoaded"
-          v-for="pokemon in pokemonStore.filteredPokemon"
+          v-for="(pokemon, index) in pokemonStore.filteredPokemon"
+          :key="index"
       >
-        <CardPokemon :pokemon="pokemon" :color="ReturnColorByType(pokemon.apiTypes[0].name)"/>
+        <CardPokemon :pokemon="pokemon"/>
       </template>
     </div>
     <div class="w-1/2 m-auto text-center" v-if="!pokemonStore.isLoaded">

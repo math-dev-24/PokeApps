@@ -3,8 +3,7 @@
 import type {Pokemon} from "@/shared/interfaces/pokemon.interface";
 
 const props = defineProps<{
-  pokemon : Pokemon,
-  color: string
+  pokemon : Pokemon
 }>()
 
 </script>
@@ -13,8 +12,7 @@ const props = defineProps<{
 <template>
   <router-link
       :to="`/detail/${props.pokemon.name}`"
-      class="block border border-sky-900 rounded p-5 m-4 flex-auto"
-      :class="props.color"
+      class="block border border-sky-900 rounded p-5 m-4 flex-auto bg-white"
       id="card">
 
     <div class="id">
@@ -27,7 +25,7 @@ const props = defineProps<{
       <h1 class="text-xl font-semibold my-2 block">
         {{props.pokemon.name}}
       </h1>
-      <template v-for="type in pokemon.apiTypes">
+      <template v-for="(type, index) in pokemon.apiTypes" :key="index">
         <div class="type">
           <img :src="type.image" alt="" class="w-7">
           <div class="ml-2 font-semibold">{{type.name}}</div>

@@ -19,19 +19,17 @@ const pokeStore = usePokemon()
 <template>
   <div class="mx-2 my-2 m-auto border p-4 bg-slate-600 rounded-lg text-white">
     <div class="flex flex-col md:flex-row content-center items-center">
-      <div class="flex flex-col m-2">
-        <span class="text-xl font-semibold my-1">Par nom :</span>
         <input
             type="text"
-            class="input_style p-1 text-slate-700"
+            class="p-2 text-slate-700 outline-none rounded w-full"
             :value="filters.search"
+            placeholder="Recherchez votre pokemon preféré"
             @input="emit('updateFilter',{search: ($event.target as HTMLInputElement).value})"
         >
-      </div>
       <div class="flex flex-col m-2">
         <span class="text-xl font-semibold my-1">Type :</span>
         <div class="flex flex-wrap">
-          <template v-for="type in pokeStore.types">
+          <template v-for="(type, index) in pokeStore.types" :key="index">
             <div
                 @click="emit('updateFilter', {types: type.name})"
                 class="bg-gray-200 m-1 cursor-pointer rounded flex content-center items-center md:p-1"
@@ -49,11 +47,3 @@ const pokeStore = usePokemon()
     </div>
   </div>
 </template>
-
-<style scoped lang="sass">
-.input_style
-  background: #eee
-  border-bottom: 2px solid black
-  border-radius: 5px 5px 0px 0px
-
-</style>
